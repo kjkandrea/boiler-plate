@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
 	},
 	password: {
 		type: String,
-		maxlength: 20
+		minlength: 5
 	},
 	role: {
 		type: Number,
@@ -60,11 +60,8 @@ userSchema.methods.comparePassword = function (plainPassword, callback) {
 
 userSchema.methods.generateToken = function (callback) {
 	// jwt 이용해서 토큰 생성
-
 	const user = this;
-	const token = jwt.sign(user._id, 'secretToken')
-
-	user.token = token
+	user.token = jwt.sign(user._id.toHexString(), 'secretToken')
 	user.save(function(error, user) {
 		if (error) return callback(error)
 		callback(null, user)

@@ -4,6 +4,7 @@ const port = 3000
 const mongoose = require('mongoose')
 const config = require('./config/key')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const { User } = require('./models/User')
 
 // application/x-www-form-urlencoded
@@ -11,6 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // application/json
 app.use(bodyParser.json())
+app.use(cookieParser())
 
 mongoose.connect(config.mongoURI, {
 	useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
@@ -55,8 +57,10 @@ app.post('/login', (req, res) => {
 			user.generateToken((error, user) => {
 				if (error) return res.status(400).send(error)
 
-				// 토큰을 저장한다. 쿠키/로컬 스토리지
-
+				// 토큰을 저장한다. 쿠키에
+				res.cookie('x_auth',user.token)
+					.status(200)
+					.json({ loginSuccess: true, userId: user._id})
 			})
 		})
 	})
