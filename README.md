@@ -15,3 +15,11 @@ git rm --cached target_directory -r
 ### nodemon
 
 코드가 바뀔떄마다 자동으로 재시작을 해줌
+
+## 단축키
+
+### 탭 간 전환 (Switch between tabs)
+
+To move between tabs, press ⇧⌘] or ⇧⌘[.
+
+이걸 여태 안썻다고?
