@@ -14,4 +14,4 @@ git rm --cached target_directory -r
 
 ### nodemon
 
- 드가 바뀔떄마다 자동으로 재시작을 해줌
+코드가 바뀔떄마다 자동으로 재시작을 해줌
