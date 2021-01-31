@@ -20,6 +20,6 @@ git rm --cached target_directory -r
 
 ### 탭 간 전환 (Switch between tabs)
 
-To move between tabs, press ⇧⌘] or ⇧⌘[.
+To move between tabs, press `⇧⌘]` or `⇧⌘[`.
 
 이걸 여태 안썻다고?
