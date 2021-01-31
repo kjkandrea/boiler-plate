@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const userSchema = mongoose.Schema({
 	name: {
@@ -54,6 +55,19 @@ userSchema.methods.comparePassword = function (plainPassword, callback) {
 	bcrypt.compare(plainPassword, this.password, function(error, isMatch) {
 		if (error) return callback(error)
 		callback(null, isMatch)
+	})
+}
+
+userSchema.methods.generateToken = function (callback) {
+	// jwt 이용해서 토큰 생성
+
+	const user = this;
+	const token = jwt.sign(user._id, 'secretToken')
+
+	user.token = token
+	user.save(function(error, user) {
+		if (error) return callback(error)
+		callback(null, user)
 	})
 }
 

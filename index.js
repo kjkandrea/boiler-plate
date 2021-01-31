@@ -52,6 +52,12 @@ app.post('/login', (req, res) => {
 			if (!isMatch) return res.json({ loginSuccess: false, message: "비밀번호가 틀렸습니다."})
 
 			// 패스워드가 일치하면 토큰 생성
+			user.generateToken((error, user) => {
+				if (error) return res.status(400).send(error)
+
+				// 토큰을 저장한다. 쿠키/로컬 스토리지
+
+			})
 		})
 	})
 })
