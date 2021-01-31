@@ -32,22 +32,21 @@ const userSchema = mongoose.Schema({
 	}
 })
 
-userSchema.pre('save', (next) => {
+userSchema.pre('save', function (next) {
 	const saltRounds = 10
+	const user = this
 
-	if (!this.isModified('password')) return;
+	if (!user.isModified('password')) return;
 	// password 를 bcrypt 로 암호화 한다.
-	bcrypt.genSalt(saltRounds, (error, salt)  => {
+	bcrypt.genSalt(saltRounds, (error, salt) => {
 		if (error) return next(error)
 
-		bcrypt.hash(this.password, salt, (error, hash) => {
+		bcrypt.hash(user.password, salt, (error, hash) => {
 			if (error) return next(error)
-			this.password = hash
+			user.password = hash
 			next()
 		})
 	});
-
-	next()
 })
 
 const User = mongoose.model('User', userSchema)
