@@ -62,7 +62,7 @@ userSchema.methods.comparePassword = function (plainPassword, callback) {
 userSchema.methods.generateToken = function (callback) {
 	// jwt 이용해서 토큰 생성
 	const user = this;
-	user.token = jwt.sign(user._id.toHexString(), 'secretToken')
+	user.token = jwt.sign(user._id.toHexString(), 'secretToken') // toHexString == mongoose 메서드
 	user.save(function(error, user) {
 		if (error) return callback(error)
 		callback(null, user)
