@@ -36,6 +36,27 @@ app.post('/register', (req, res) => {
 	})
 })
 
+app.post('/login', (req, res) => {
+	// 요청된 이메일이 데이터베이스에 있는지 판별
+	User.findOne({ email: req.body.email }, (error, user) => {
+		if (!user) {
+			return res.json({
+				loginSuccess: false,
+				message: "존재하지 않는 이메일입니다."
+			})
+		}
+	})
+
+	// 요청된 이메일이 데이터 베이스에 있다면
+	// 패스워드가 일치하는지 판별
+	user.comparePassword(req.body.password, (error, isMatch) => {
+
+	})
+
+	// 패스워드가 일치하면 토큰 생성
+
+})
+
 app.listen(port, () => {
 	console.log(`Example app listening at http://localhost:${port}`)
 })
