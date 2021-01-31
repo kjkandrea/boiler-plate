@@ -16,6 +16,10 @@ app.get('/', (req, res) => {
 	res.send('Hello World!')
 })
 
+app.post('/register', (req, res) => {
+	// 회원가입 할때 필요한 정보들을 client 에서 가져오면 데이터 베이스에 넣어준다.
+})
+
 app.listen(port, () => {
 	console.log(`Example app listening at http://localhost:${port}`)
 })
