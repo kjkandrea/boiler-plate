@@ -8,11 +8,15 @@ const auth = (req, res, next) => {
 
   // 토큰을 복호화 한 후,
   // 유저를 찾는다.
-  User.findByToken
+  User.findByToken(token, (error, user) => {
+    if (error) throw error;
+    if (!user) return res.json({ isAuth: false, error: true })
 
-  // 유저가 있으면 인증 완료
+    req.token = token;
+    req.user = user;
 
-  // 유저가 없으면 인증 실패
+    next()
+  })
 }
 
 module.exports = auth
