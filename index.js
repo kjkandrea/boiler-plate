@@ -32,6 +32,8 @@ app.post('/api/user/register', (req, res) => {
 	const user = new User(req.body)
 	user.save((error, userInfo) => {
 		if(error) return res.json({ success: false, error})
+		console.log(userInfo)
+
 		return res.status(200).json ({
 			success: true
 		})
@@ -66,7 +68,7 @@ app.post('/api/user/login', (req, res) => {
 	})
 })
 
-// commit test..
+// commit test...
 
 app.listen(port, () => {
 	console.log(`Example app listening at http://localhost:${port}`)
