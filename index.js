@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const config = require('./config/key')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const { auth } = require('./middleware/auth')
 const { User } = require('./models/User')
 
 // application/x-www-form-urlencoded
@@ -66,7 +67,18 @@ app.post('/api/user/login', (req, res) => {
 	})
 })
 
-//
+api.get('/api/users/auth', auth, (req, res) => {
+	// 인증 처리
+
+	// 클라이언트 쿠키에서 토큰을 가져온다.
+
+	// 토큰을 복호화 한 후,
+	// 유저를 찾는다.
+
+	// 유저가 있으면 인증 완료
+
+	// 유저가 없으면 인증 실패
+})
 
 app.listen(port, () => {
 	console.log(`Example app listening at http://localhost:${port}`)
