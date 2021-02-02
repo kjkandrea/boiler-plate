@@ -67,9 +67,22 @@ app.post('/api/user/login', (req, res) => {
 	})
 })
 
-api.get('/api/users/auth', auth, (req, res) => {
-	// 인증 처리
+app.get('/api/users/auth', auth, (req, res) => {
 
+	// 요기까지 왔다는것은 auth 미들웨어를 통과한 것
+	// Authentication === true
+	const ADMIN_ROLE = 0;
+
+	res.status(200).json({
+		_id: req.user.id,
+		isAdmin: req.user.role === ADMIN_ROLE,
+		isAuth: true,
+		email: req.user.email,
+		name: req.user.name,
+		lastname: req.user.lastname,
+		role: req.user.role,
+		image: req.user.image,
+	})
 })
 
 app.listen(port, () => {
